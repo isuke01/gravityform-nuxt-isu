@@ -77,7 +77,40 @@ add_action('rest_api_init', function () {
 
 ```
 
-### USAGE:
+## TO DO:
+    FIX LABEL FOR !!! 
+
+    Nested inputes (?)
+    Paginated paged form
+    Add support for hidden labels
+    Add support for dynamic populated  values
+    Add support for datepickers
+    Add support to HTML dynamic fields
+    Add support for condition logic fields
+    Form settings for label placement
+    Number fields enable calculation (? whatever it is for GF)
+    Require mark based on Form settings
+    Numbers: Format number
+    Make label as Component
+    Checkboxes select all option
+    Better validations
+    Rewrite to standard vue 2 (?)
+    Rewrite to Vue 3 (?)
+    Rewrite to NPM package (?)
+    Create better logic functions with mixins
+
+    Create i18n support
+
+    
+
+TODO: Implement number min/max, these currently aren't fetch by the source plugin
+https://docs.gravityforms.com/field-object/#number
+<div class="instruction ">
+    Please enter a number from <strong>1</strong> to <strong>15</strong>.
+</div>
+
+# USAGE            
+
 Example usage: 
 
 ```js
@@ -123,41 +156,6 @@ Example usage with custom component button:
 ```
 Tip: 
 `slotProps` are props passed by slot to the template, and we bind them into our custom `Button` in the example case. More: https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots
-
-## TO DO:
-    FIX LABEL FOR !!! 
-
-    Nested inputes (?)
-    Paginated paged form
-    Add support for hidden labels
-    Add support for dynamic populated  values
-    Add support for datepickers
-    Add support to HTML dynamic fields
-    Add support for condition logic fields
-    Form settings for label placement
-    Number fields enable calculation (? whatever it is for GF)
-    Require mark based on Form settings
-    Numbers: Format number
-    Make label as Component
-    Checkboxes select all option
-    Better validations
-    Rewrite to standard vue 2 (?)
-    Rewrite to Vue 3 (?)
-    Rewrite to NPM package (?)
-    Create better logic functions with mixins
-
-    Create i18n support
-
-    
-
-TODO: Implement number min/max, these currently aren't fetch by the source plugin
-https://docs.gravityforms.com/field-object/#number
-<div class="instruction ">
-    Please enter a number from <strong>1</strong> to <strong>15</strong>.
-</div>
-
-# USAGE            
-
 ### Custom submit button
 
 Custom submit button can by set using scoped slot named `submitButton`
