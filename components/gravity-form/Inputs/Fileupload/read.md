@@ -1,0 +1,17 @@
+## TODO:
+- Remove file from the list
+- Distinct images and files
+- Icons for file types (Extra)
+- Proper file list
+- Check browsers (SAFARI!)
+- Handle supported file types (GF setting)
+- Handle supported file sizes (GF settings)
+- Handle supported file count (GF settings)
+- Limit unwanted files to uplaod
+- Display GF settings related to the files and sizes under the field
+- Handle server errors for files
+- Handle browser errors for files
+- Handle api erros for the files
+- Maybe create simple file input?
+- Add aria labels for elements
+- Find way to merge multiple file fields into one area (due to incompability from GF api multi select)
