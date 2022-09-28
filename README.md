@@ -1,13 +1,9 @@
 # NUXT/Vue2 Gravity Form component
 #### Tested with Gravity form 2.6.3 and WP 5.9.3
 
-This is jsut example of usage the component.
+This is just example of usage the component.
 
 This is simple implementation for base elements for the Gravity form and Nuxt2, but it should work also with VUE2.
-
-
-I'm using this wich Nuxt snce with VUE and frontend-mounted app it is easier just to use standard GF GET-iframe-import-form and it will support all features out of box with no extra coding
-... I'll link later the examle how to make it.
 
 
 ### IMPORTANT
