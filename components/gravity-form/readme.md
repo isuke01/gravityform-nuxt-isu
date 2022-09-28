@@ -6,9 +6,6 @@ This is jsut example of usage the component.
 This is simple implementation for base elements for the Gravity form and Nuxt2, but it should work also with VUE2.
 
 
-I'm using this wich Nuxt snce with VUE and frontend-mounted app it is easier just to use standard GF GET-iframe-import-form and it will support all features out of box with no extra coding
-... I'll link later the examle how to make it.
-
 
 ### IMPORTANT
 Inspired by: https://bitbucket.org/gohike/gravity-forms/src/master/
@@ -155,7 +152,7 @@ Example usage with custom component button:
     </GForm>
 ```
 Tip: 
-`slotProps` are props passed by slot to the template, and we bind them into our custom `Button` in the example case. More: https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots
+`slotProps` are props passed be slot to the template, and we bind them into our custom `Button` in the example case. More: https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots
 ### Custom submit button
 
 Custom submit button can by set using scoped slot named `submitButton`
