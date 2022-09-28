@@ -154,7 +154,7 @@ Tip:
 `slotProps` are props passed by slot to the template, and we bind them into our custom `Button` in the example case. More: https://v2.vuejs.org/v2/guide/components-slots.html#Scoped-Slots
 ### Custom submit button
 
-Custom submit button can by set using scoped slot named `submitButton`
+Custom submit button can be set using scoped slot named `submitButton`
 Example usage with custom component button:
 ```html
 <template v-slot:submitButton="slotProps">
