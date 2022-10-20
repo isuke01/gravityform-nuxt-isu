@@ -27,6 +27,7 @@
             :class="theme"
         >
             <div :id="'gf_' + form.id" class="gform_anchor" tabindex="-1"></div>
+
             <ErrorMessage v-if="formHasErrors()" />
 
             <div class="gform_heading">
@@ -128,7 +129,11 @@ import ErrorMessage from '@/components/gravity-form/Formparts/ErrorMessage'
 import Confirmation from '@/components/gravity-form/Formparts/Confirmation'
 import SubmissionError from '@/components/gravity-form/Formparts/SubmissionError'
 
-//TODO: Confirmation msg component!
+import { animateScrollTo } from './utils/utils.js'
+//Confirmation msg component!
+
+//Based on :
+//https://github.com/robmarshall/gatsby-plugin-gravity-forms/
 
 export default {
     name: 'gravity-form',
@@ -185,6 +190,7 @@ export default {
             confirmationMsg: '',
             isSending: false,
             isLoading: true,
+            isSubmissionError: false, 
 
             showDebug: false,
             isMultipart: false, //will be set if form contains file upload fields
@@ -292,7 +298,7 @@ export default {
             return (this.form && this.form.id && !this.formSubmitted) || (this.form && this.form.id && this.formHasErrors())
         },
         formHasErrors(){
-            return (Object.keys(this.errors).length !== 0)
+            return ( Object.keys(this.errors).length !== 0 || this.isSubmissionError )
         },
 
         scrollToFromTop(){
@@ -339,7 +345,8 @@ export default {
          */
         async onSubmitCallback(ev){
             const VM = this
-            
+            this.isSubmissionError = false //Reset error
+          
             /*
             * We can't use just form data since it has issue with files in current setup. If there is anytone with better idea to handle it. 
             * You're welcome to change it :)
@@ -356,7 +363,7 @@ export default {
             /**
              * Add validate handler here too.
             */
-            let hasErrors = false
+            let hasInputErrors = false
             this.errors = {} // null errors
            //Maybe validate all fields before send
 
@@ -378,7 +385,7 @@ export default {
                     //Input name : message
                     // basically message is for the api validation if so happen
                     this.errors[inputName] = true
-                    hasErrors = true
+                    hasInputErrors = true
                     return
                 }
 
@@ -422,10 +429,10 @@ export default {
                             const items = fieldData.length
                             if(items < minItems){
                                 this.errors[inputName] = 'More files are required'
-                                hasErrors = true
+                                hasInputErrors = true
                             }else if(items > maxItems){
                                 this.errors[inputName] = 'There are too many files selected'
-                                hasErrors = true
+                                hasInputErrors = true
                             }else{
                                 //First we want to populare required fields to avoid missing field errors
                                 //maybe order by id too ?
@@ -455,7 +462,7 @@ export default {
                 }
             });
             
-            if(hasErrors) {
+            if( hasInputErrors ) {
                 this.scrollToFromTop()
                 return false;
             }
@@ -487,13 +494,15 @@ export default {
                         this.fromSendedSuccesfully = true
                         this.confirmationMsg = r.confirmation_message
                     }
-                    this.$emit('onFormSubmit', r)
                 }).catch(e => {
-                    console.log('submission error', e.message)
-                    this.$emit('onFormSubmit', false)
+                    console.warn('submission error', e.message)
 
                     const response = e.response
+                    this.isSubmissionError = true 
+
+                    console.warn( 'Submission Error', response )
                     //process response
+
                     if(response && response.data && response.status === 400){
                         const data = response.data
                         if(data.validation_messages && (Object.keys(data.validation_messages).length !== 0) ){
@@ -502,9 +511,10 @@ export default {
                                 this.errors[inpName] = value
                             }
                             this.scrollToFromTop()
-                            hasErrors = true
                         }
                     }
+
+
 
                 }) .then( () =>  {
                     this.isSending = false
@@ -556,12 +566,10 @@ export default {
                     }
                     
                     this.form = e
-                    this.$emit('onFormLoad', this.form)
 
                 }
             }).catch(e => {
                 console.log('error', e)
-                this.$emit('onFormLoad', false)
             }).then(() => {
                 this.isLoading = false
             })
@@ -727,8 +735,7 @@ export default {
 
             input, select{
                 &.large{
-                    width: max-content;
-                    width: -webkit-fill-available;
+                width: 100%;
                 }
             }
 
